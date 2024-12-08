@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timetable Generator</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="page active">
+        <div class="login-container">
+           
+            <h1 class="login-title">Timetable Generator</h1>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="userId">User ID</label>
+                    <input type="text" id="userId" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required>
+                </div>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard Page -->
+    <div id="dashboardPage" class="page">
+        <nav class="navbar">
+            <div class="nav-brand">Timetable Generator</div>
+            <div class="nav-items">
+                <button id="logoutBtn" class="icon-btn">Logout</button>
+            </div>
+        </nav>
+
+        <main class="dashboard-content">
+            <!-- Setup Wizard -->
+            <div class="setup-container">
+                <div class="setup-step active" id="semesterStep">
+                    <h2>Select Semester</h2>
+                    <div class="input-group">
+                        <select id="semesterSelect">
+                            <option value="">Choose Semester</option>
+                            <option value="SEM_1">1st Semester</option>
+                            <option value="SEM_2">2nd Semester</option>
+                            <option value="SEM_3">3rd Semester</option>
+                            <option value="SEM_4">4th Semester</option>
+                            <option value="SEM_5">5th Semester</option>
+                            <option value="SEM_6">6th Semester</option>
+                            <option value="SEM_7">7th Semester</option>
+                            <option value="SEM_8">8th Semester</option>
+                        </select>
+                    </div>
+                    <button id="nextToConfig" class="primary-btn">Next</button>
+                </div>
+
+                <div class="setup-step" id="cycleStep">
+                    <h2>Select Cycle</h2>
+                    <div class="input-group">
+                        <select id="cycleSelect">
+                            <option value="">Choose Cycle</option>
+                            <option value="physics">Physics Cycle</option>
+                            <option value="chemistry">Chemistry Cycle</option>
+                        </select>
+                    </div>
+                    <button id="nextToDepartment" class="primary-btn">Next</button>
+                    <button class="secondary-btn back-btn">Back</button>
+                </div>
+
+                <div class="setup-step" id="departmentStep">
+                    <h2>Select Department</h2>
+                    <div class="input-group">
+                        <select id="departmentSelect">
+                            <option value="">Choose Department</option>
+                        </select>
+                    </div>
+                    <button id="finishSetup" class="primary-btn">Start Adding Subjects</button>
+                    <button class="secondary-btn back-btn">Back</button>
+                </div>
+            </div>
+
+            <!-- Main Content (initially hidden) -->
+            <div class="main-content" style="display: none;">
+                <!-- Subject Input Form -->
+                <div class="subject-form-container">
+                    <h2>Add Subject</h2>
+                    <form id="subjectForm" class="subject-form">
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="subjectName">Subject Name</label>
+                                <input type="text" id="subjectName" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="subjectCode">Subject Code</label>
+                                <input type="text" id="subjectCode" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="hoursPerWeek">Hours Per Week</label>
+                                <input type="number" id="hoursPerWeek" min="1" max="10" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="priority">Priority (1-8)</label>
+                                <input type="number" id="priority" min="1" max="8" required>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group checkbox-group">
+                                <label>
+                                    <input type="checkbox" id="isLab">
+                                    Is Lab Subject
+                                </label>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label for="teachers">Teachers (comma-separated)</label>
+                                <input type="text" id="teachers" required>
+                            </div>
+                        </div>
+                        <button type="submit">Add Subject</button>
+                    </form>
+                </div>
+
+                <!-- Subject List -->
+                <div class="subject-list-container">
+                    <h2>Added Subjects</h2>
+                    <div id="subjectList" class="subject-list"></div>
+                </div>
+
+                <!-- Generate Button -->
+                <div class="controls">
+                    <button id="generateBtn" class="primary-btn">Generate Timetable</button>
+                </div>
+
+                <!-- Timetable -->
+                <div class="timetable-container">
+                    <table id="timetable">
+                        <thead>
+                            <tr>
+                                <th>Day/Time</th>
+                                <th>9:00-10:00</th>
+                                <th>10:00-11:00</th>
+                                <th>11:00-11:15</th>
+                                <th>11:15-12:15</th>
+                                <th>12:15-1:15</th>
+                                <th>1:15-2:15</th>
+                                <th>2:15-3:15</th>
+                                <th>3:15-4:15</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast Notifications -->
+    <div id="toast" class="toast"></div>
+
+    <script type="module" src="js/main.js"></script>
+</body>
+</html>
